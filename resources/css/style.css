@@ -1,0 +1,50 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    outline: 0px;
+    text-decoration: none;
+    color: black;
+    list-style-type: none;
+    transition-duration: 0.5s;
+}
+
+body {
+    background-color: var(--boja2);
+    --boja1: #534859;
+    --boja2: #FBF0E8;
+    --boja3: #FBD0D0;
+    --boja4: #F9688D;
+    overflow-x: hidden;
+}
+
+/* ⁡⁢⁣⁣//////////////////////// INDEX  /////////////////////////⁡ */
+
+header{
+
+}
+#logInPopUp,#registerPopUp{
+    display: flex;
+    /* position: absolute; */
+    width: 100vw;
+    /* height: 100vh; */
+    /* top: 0%; */
+    /* left: 0%; */
+    /* background-color: rgba(0,0,0,0.7); */
+    align-items: center;
+    justify-content: center;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 2vw;
+    text-align: center;
+}
+#greskaLogin{
+    display: flex;
+    flex-direction: column;
+}
+#greskaLogin p{
+    color: red;
+}
+/* ⁡⁣⁣⁢/////////////////////////////////////////////////////////////////////////⁡ */
