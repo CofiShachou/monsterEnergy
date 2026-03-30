@@ -15,13 +15,24 @@
 
     <?php
         session_start();
-        if($_SESSION["ussername"]=="Mateja"){
-            echo "<p>NIGGA</p>";
+        $con=new PDO("mysql:host=localhost;dbname=monsterenergy","root","");
+        $rezultat=$con->query("select * from ussers");
+        $exists=false;
+        foreach($rezultat as $red){
+        var_dump($red["ussername"]);
+            if($_SESSION["ussername"]==$red["ussername"] && $_SESSION["password"]==$red["password"] && $red["role_id"]==2){
+               $exists=true;
+            }
+        }
+        if($exists){
+             echo "<p>NIGGA</p>";
             require_once "header.php";
+            $exists=false;
         }
         else{
             header("location: index.php");
         }
+        
     ?>
 
     
