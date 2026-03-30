@@ -37,6 +37,7 @@
                 <label for="registerEmail">Email:</label>
                 <input type="email" name="registerEmail" id="registerEmail">
             </div>
+            <div id="greskaRegister"></div>
             <div>
                 <button id="sendRegister">Send</button>
                 <button id="closeRegister">Close</button>
