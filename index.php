@@ -21,10 +21,13 @@
             $_SESSION["password"]="";
             require_once "header.php";  
         }
-        var_dump($_SESSION["ussername"]);
+        // var_dump($_SESSION["ussername"]);
         
     ?>
-
+    <div id="main">
+        <h1>Monster Energy</h1>
+        <h2>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptates adipisci provident repudiandae similique perferendis. Nobis architecto repellat magnam sint est!</h2>
+    </div>
    
 
 

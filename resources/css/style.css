@@ -10,29 +10,48 @@
 }
 
 body {
-    background-color: var(--boja2);
-    --boja1: #534859;
-    --boja2: #FBF0E8;
-    --boja3: #FBD0D0;
-    --boja4: #F9688D;
+    background-color: var(--seccondary);
+
+    --background:#fee0ff;
+    --background:#FFFFFF;
+    --seccondary:#FFB8D1;
+    --seccondary2:#EECCEE;
+    --accent:#6F2238;
+    --shade:#E0E1E9;
+
     overflow-x: hidden;
 }
 
 /* ⁡⁢⁣⁣//////////////////////// INDEX  /////////////////////////⁡ */
 
 header{
-
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--seccondary);
+    padding: 1vw;
 }
 #logInPopUp,#registerPopUp{
     display: flex;
-    /* position: absolute; */
     width: 100vw;
-    /* height: 100vh; */
-    /* top: 0%; */
-    /* left: 0%; */
-    /* background-color: rgba(0,0,0,0.7); */
     align-items: center;
     justify-content: center;
+}
+ul{
+    display: flex;
+    gap: 1vw;
+}
+ul a{
+    color: var(--accent);
+}
+#main{
+    width: 100vw;
+    display: flex;
+    padding: 0vw 10vw;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    text-align: center;
 }
 form{
     display: flex;

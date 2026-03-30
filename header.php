@@ -41,8 +41,10 @@
                 }
         else{
             echo "
-            <button id='btnLogin'>Log In</button>
-            <button id='btnRegister'>Register</button>
+            <div>
+                <button id='btnLogin'>Log In</button>
+                <button id='btnRegister'>Register</button>
+            </div>
             ";
             }
         echo"</header>";

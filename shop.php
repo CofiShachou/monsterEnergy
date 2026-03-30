@@ -12,7 +12,32 @@
 </head>
 <body>
 
+    <?php
+        session_start();
+        if(isset($_SESSION["ussername"]) && isset($_SESSION["password"])){
+            require_once "header.php";
+        }
+        else{
+            $_SESSION["ussername"]="";
+            $_SESSION["password"]="";
+            require_once "header.php";  
+        }
+    ?>
+    
 
+    <form>
+        <div id="filters">
+            <label for=""></label>
+            <input type="text" name="" id="">
+            <label for=""></label>
+            <select name="" id=""></select>
+        </div>
+        <div id="catalog">
+            <div>
+
+            </div>
+        </div>
+    </form>
 
 
     
