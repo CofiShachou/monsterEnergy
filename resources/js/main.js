@@ -104,3 +104,7 @@ $("#signOut").click(()=>{
     }, 100);
 })
 
+$(".checkBox").change(()=>{
+    $("#filterForm").submit();
+    
+})

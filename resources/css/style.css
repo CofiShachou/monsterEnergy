@@ -4,31 +4,35 @@
     border: 0px;
     outline: 0px;
     text-decoration: none;
-    color: black;
+    color: white;
     list-style-type: none;
     transition-duration: 0.5s;
 }
 
 body {
-    background-color: var(--seccondary);
+    background-color: var(--s1);
 
-    --background:#fee0ff;
-    --background:#FFFFFF;
-    --seccondary:#FFB8D1;
-    --seccondary2:#EECCEE;
-    --accent:#6F2238;
-    --shade:#E0E1E9;
+    --background:#000000;
+    --s1:#242424;
+    --secondary:#cc6cee;
+    --text:#FFFFFF;
 
     overflow-x: hidden;
 }
 
 /* ⁡⁢⁣⁣//////////////////////// INDEX  /////////////////////////⁡ */
-
+#shop{
+    margin-top: 5vw;
+}
 header{
     display: flex;
     justify-content: space-around;
-    background-color: var(--seccondary);
+    position: fixed;
+    top: 0%;
+    width: 100vw;
+    background-color: var(--background);
     padding: 1vw;
+    border-bottom: 2px solid var(--secondary);
 }
 #logInPopUp,#registerPopUp{
     display: flex;
@@ -36,12 +40,22 @@ header{
     align-items: center;
     justify-content: center;
 }
+input[type=text]{
+    background-color: var(--s1);
+    color: var(--secondary);
+    padding: 0.2vw;
+    border-radius: 5px;
+    border: 1px solid var(--background);
+}
+input[type=text]:focus{
+    border: 1px solid var(--secondary);
+}
 ul{
     display: flex;
     gap: 1vw;
 }
 ul a{
-    color: var(--accent);
+    color: var(--text);
 }
 #main{
     width: 100vw;
@@ -57,7 +71,7 @@ form{
     display: flex;
     flex-direction: column;
     gap: 2vw;
-    text-align: center;
+    /* text-align: center; */
 }
 #greskaLogin{
     display: flex;
@@ -73,18 +87,38 @@ form{
 #shop{
     display: flex;
 }
+#filters{
+    background-color: var(--background);
+    border-radius: 10px;
+    border-right: 2px solid var(--secondary);
+    padding: 1vw;
+}
 #chategory{
     display: flex;
     flex-direction: column;
 }
+#catalog{
+    background-color: var(--background);
+    width: 100%;
+    padding: 1vw;
+    box-sizing: border-box;
+}
 .page{
     display: grid;
-    grid-template-columns: repeat(5,300px);
-    grid-template-rows: repeat(auto,300px);
+    /* width: 100%; */
+    justify-content: center;
+    grid-template-columns: repeat(5,19%);
+    grid-template-rows: repeat(auto,auto);
+    gap: 0.5vw;
 }
 .item{
-    background-color: red;
     text-align: center;
+    border: 2px solid var(--secondary);
+    border-radius: 10px;
+    padding: 1vw;
+}
+.item p{
+    color: var(--text);
 }
 
 /* ⁡⁣⁣⁢/////////////////////////////////////////////////////////////////////////⁡ */

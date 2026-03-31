@@ -25,7 +25,7 @@
     ?>
     
     <div id="shop">
-        <form>
+        <form id="filterForm" action="shop.php" method="get">
             <div id="filters">
                 <div>
                     <label for="">Name:</label>
@@ -35,24 +35,34 @@
                  <div>
                      <fieldset id="chategory" name="chategory">
                         <legend>Chategory:</legend>
-                        <div>
-                        <label for="">Monster 1</label>
-                        <input type="checkbox" name="" id="">
-                        </div>
-                        <div>
-                        <label for="">Monster 1</label>
-                        <input type="checkbox" name="" id="">
-                        </div>
-                        <div>
-                        <label for="">Monster 1</label>
-                        <input type="checkbox" name="" id="">
-                        </div>
+                        <?php
+                            $con=new PDO("mysql:host=localhost;dbname=monsterenergy","root","");
+                            $rezultat=$con->query("select * from chategory");
+                            $check="";
+                            foreach($rezultat as $red){
+                                // var_dump($_GET["chategory"]);
+                                if(isset($_GET["chategory"]) && in_array($red["chategory_id"],$_GET["chategory"]))
+                                {
+                                    $check="checked";
+                                }
+                                else{
+                                    $check="";
+                                }
+                                echo "
+                                <div>
+                                    <input 
+                                    type='checkbox' 
+                                    name='chategory[]' 
+                                    id='".$red["chategory_id"]."' 
+                                    value='".$red["chategory_id"]."' 
+                                    class='checkBox' 
+                                    $check>
+                                    <label for='".$red["chategory_id"]."'>".$red["chategory_name"]."</label>
+                                </div>
+                                ";
+                            }
+                        ?>
                     </fieldset>
-                    <!-- <select name="" id="">
-                        <option value="">Nesto</option>
-                        <option value="">Nesto</option>
-                        <option value="">Nesto</option>
-                    </select> -->
                  </div>
             </div>
           </form>
@@ -63,14 +73,31 @@
                     $con=new PDO("mysql:host=localhost;dbname=monsterenergy","root","");
                     $rezultat=$con->query("select * from products p join chategory c on p.chategory= c.chategory_id");
 
-                    foreach($rezultat as $red){
-                        echo "
-                            <div class='item'>
-                                <img src='resources/images/".$red["image"]."' alt=''>
-                                <p>".$red["product_name"]."</p>
-                                <p>".$red["chategory_name"]."</p>
-                            </div>
-                        ";
+                    if(isset($_GET["chategory"])){
+
+                        $ids = implode(",", $_GET["chategory"]);
+                        $rezultat=$con->query("select * from products p join chategory c on p.chategory= c.chategory_id WHERE chategory IN ($ids)");
+                        foreach($rezultat as $red){
+                            echo "
+                                <div class='item'>
+                                    <img src='resources/images/".$red["image"]."' alt=''>
+                                    <p>".$red["product_name"]."</p>
+                                    <p>".$red["chategory_name"]."</p>
+                                </div>
+                            ";
+                        }
+                    }
+                    else{
+                        $rezultat=$con->query("select * from products p join chategory c on p.chategory= c.chategory_id");
+                        foreach($rezultat as $red){
+                            echo "
+                                <div class='item'>
+                                    <img src='resources/images/".$red["image"]."' alt=''>
+                                    <p>".$red["product_name"]."</p>
+                                    <p>".$red["chategory_name"]."</p>
+                                </div>
+                            ";
+                        }
                     }
                 ?>
                 
