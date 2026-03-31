@@ -66,4 +66,25 @@ form{
 #greskaLogin p{
     color: red;
 }
+.controls{
+    display: flex;
+    gap: 1vw;
+}
+#shop{
+    display: flex;
+}
+#chategory{
+    display: flex;
+    flex-direction: column;
+}
+.page{
+    display: grid;
+    grid-template-columns: repeat(5,300px);
+    grid-template-rows: repeat(auto,300px);
+}
+.item{
+    background-color: red;
+    text-align: center;
+}
+
 /* ⁡⁣⁣⁢/////////////////////////////////////////////////////////////////////////⁡ */

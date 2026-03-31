@@ -100,7 +100,7 @@ $("#signOut").click(()=>{
     })
     
     setTimeout(() => {
-        window.location=`index.php`
+        window.location.reload()
     }, 100);
 })
 

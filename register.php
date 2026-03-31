@@ -14,6 +14,10 @@
 
     <?php
         session_start();
+        session_start();
+        if(isset($_SESSION["ussername"]) && isset($_SESSION["password"]) && $_SESSION["ussername"]!="" && $_SESSION["password"]!=""){
+            header("location: index.php");
+        }
         if(isset($_SESSION["ussername"]) && isset($_SESSION["password"])){
             require_once "header.php";
         }

@@ -15,6 +15,16 @@
         // session_start();
         $con=new PDO("mysql:host=localhost;dbname=monsterenergy","root","");
         $rezultat=$con->query("select * from header");
+
+        $conUser=new PDO("mysql:host=localhost;dbname=monsterenergy","root","");
+        $rezUser=$conUser->query("select u.ussername, u.password,u.role_id as role from ussers u join roles r on u.role_id = r.role_id");
+        $exists=false;
+        foreach($rezUser as $red){
+            // echo $red["role"];
+            if($_SESSION["ussername"]==$red["ussername"] && $_SESSION["password"]==$red["password"] && $red["role"]==2){
+                    $exists=true;
+                }
+        }
         
         
         echo " <header> <ul>";
@@ -23,8 +33,10 @@
                 echo "<li><a href=".$red["location"].">".$red["name"]."</a></li>";
 
 
-            if($_SESSION["ussername"]=="Mateja" && $red["name"]=="Admin panel")
+            if($exists && $red["name"]=="Admin panel"){
                 echo "<li><a href=".$red["location"].">".$red["name"]."</a></li>";
+                $exists=false;
+            }
         }
         echo "</ul> ";
         
@@ -37,7 +49,7 @@
             && ($_SESSION["password"]!="")
             ){
 
-                echo "<button id='signOut'>Sign out</button>";
+                echo "<div class='controls'><p>".$_SESSION["ussername"]."</p><button id='signOut'>Sign out</button><div>";
                 }
         else{
             echo "

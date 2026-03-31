@@ -24,21 +24,61 @@
         }
     ?>
     
+    <div id="shop">
+        <form>
+            <div id="filters">
+                <div>
+                    <label for="">Name:</label>
+                     <input type="text" name="" id="">
+                 </div>
 
-    <form>
-        <div id="filters">
-            <label for=""></label>
-            <input type="text" name="" id="">
-            <label for=""></label>
-            <select name="" id=""></select>
-        </div>
-        <div id="catalog">
-            <div>
+                 <div>
+                     <fieldset id="chategory" name="chategory">
+                        <legend>Chategory:</legend>
+                        <div>
+                        <label for="">Monster 1</label>
+                        <input type="checkbox" name="" id="">
+                        </div>
+                        <div>
+                        <label for="">Monster 1</label>
+                        <input type="checkbox" name="" id="">
+                        </div>
+                        <div>
+                        <label for="">Monster 1</label>
+                        <input type="checkbox" name="" id="">
+                        </div>
+                    </fieldset>
+                    <!-- <select name="" id="">
+                        <option value="">Nesto</option>
+                        <option value="">Nesto</option>
+                        <option value="">Nesto</option>
+                    </select> -->
+                 </div>
+            </div>
+          </form>
+
+         <div id="catalog">
+            <div class="page">
+                <?php
+                    $con=new PDO("mysql:host=localhost;dbname=monsterenergy","root","");
+                    $rezultat=$con->query("select * from products p join chategory c on p.chategory= c.chategory_id");
+
+                    foreach($rezultat as $red){
+                        echo "
+                            <div class='item'>
+                                <img src='resources/images/".$red["image"]."' alt=''>
+                                <p>".$red["product_name"]."</p>
+                                <p>".$red["chategory_name"]."</p>
+                            </div>
+                        ";
+                    }
+                ?>
+                
 
             </div>
-        </div>
-    </form>
-
+    </div>
+</div>
+    
 
     
 
