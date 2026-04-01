@@ -21,7 +21,7 @@ body {
 }
 
 /* ⁡⁢⁣⁣//////////////////////// INDEX  /////////////////////////⁡ */
-#shop{
+#shop,#contact{
     margin-top: 5vw;
 }
 header{
@@ -66,6 +66,20 @@ ul a{
     align-items: center;
     box-sizing: border-box;
     text-align: center;
+}
+button{
+    background-color: var(--background);
+    /* color: var(--secondary); */
+    border: 2px solid var(--secondary);
+    border-radius: 10px;
+    padding: 0.5vw;
+    box-shadow: 2px 2px 10px var(--background),
+    -2px -2px 10px var(--background);
+}
+button:hover{
+    cursor: pointer;
+    box-shadow: 2px 2px 10px var(--secondary),
+    -2px -2px 10px var(--secondary);
 }
 form{
     display: flex;

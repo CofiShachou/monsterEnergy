@@ -14,29 +14,64 @@
 
     <?php
         session_start();
+        $con=new PDO("mysql:host=localhost;dbname=monsterenergy","root","");
         if(isset($_SESSION["ussername"]) && isset($_SESSION["password"])){
-            require_once "header.php";
+            // require_once "header.php";
         }
         else{
             $_SESSION["ussername"]="";
             $_SESSION["password"]="";
-            require_once "header.php";  
+            // require_once "header.php";  
         }
+        if(isset($_POST["upload"])){
+            $slika=$_FILES["uploadImage"];
+            echo $slika["name"];
+            echo "<br>";
+            echo $slika["type"];
+            $ext=pathinfo($slika["name"],PATHINFO_EXTENSION);
+            $allowedExtentions=["png","jpg","jpeg"];
+            if(in_array($ext,$allowedExtentions)){
+                move_uploaded_file($slika["tmp_name"],"resources/images/".$slika["name"]);
+
+                $insertImage=$con->prepare("insert into products ");
+                // ........
+            }
+            else{
+                echo "Mogu se uploadovati samo png jpg i jpeg slike";
+            }
+        }  
     ?>
     
     <div id="shop">
-        <form id="filterForm" action="shop.php" method="get">
+        <form id="filterForm" action="shop.php" method="get" >
             <div id="filters">
                 <div>
-                    <label for="">Name:</label>
-                     <input type="text" name="" id="">
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" id="name" 
+                    <?php 
+                    if(isset($_GET["reset"])){
+                        $_GET["name"]="";
+                    }
+                    if(!isset($_GET["name"])){
+                        $_GET["name"]="";
+                    }
+                    // var_dump($_SESSION["name"]);
+                    $x='dsa';
+                    if(isset($_SESSION["name"])){
+                        echo "value='".$_GET["name"]."'";
+                        // echo "value='".$x."'";
+                    }
+                    ?>
+                    >
+                    <button name="reset"><i class="fa-solid fa-xmark"></i></button>
+                    <button name="search">Search</button>
                  </div>
 
                  <div>
                      <fieldset id="chategory" name="chategory">
                         <legend>Chategory:</legend>
                         <?php
-                            $con=new PDO("mysql:host=localhost;dbname=monsterenergy","root","");
+                            
                             $rezultat=$con->query("select * from chategory");
                             $check="";
                             foreach($rezultat as $red){
@@ -63,18 +98,59 @@
                             }
                         ?>
                     </fieldset>
-                 </div>
+                </div>
             </div>
-          </form>
+        </form>
+        <form action="shop.php" method="POST" enctype="multipart/form-data">
+            <div>
+                <label for="uploadImage">Upload image:</label>
+                <input type="file" name="uploadImage" id="uploadImage">
+                <button name="upload" value="up">Upload</button>
+            </div>
+        </form>
 
          <div id="catalog">
             <div class="page">
                 <?php
-                    $con=new PDO("mysql:host=localhost;dbname=monsterenergy","root","");
-                    $rezultat=$con->query("select * from products p join chategory c on p.chategory= c.chategory_id");
+                    
 
-                    if(isset($_GET["chategory"])){
-
+                    if(isset($_GET["name"])){
+                        $_SESSION["name"]=$_GET["name"];
+                    }
+                    else{
+                        if(!isset($_SESSION["name"]))
+                        $_SESSION["name"]="";
+                    }
+                    // var_dump($_SESSION["name"]);
+                    if(isset($_SESSION["name"]) && $_SESSION["name"]!="" && isset($_GET["chategory"])){
+                        // echo 'oba';
+                        $ids = implode(",", $_GET["chategory"]);
+                        $rezultat=$con->query("select * from products p join chategory c on p.chategory= c.chategory_id WHERE chategory IN ($ids) and product_name like '%".$_SESSION["name"]."%'");
+                        foreach($rezultat as $red){
+                            echo "
+                                <div class='item'>
+                                    <img src='resources/images/".$red["image"]."' alt=''>
+                                    <p>".$red["product_name"]."</p>
+                                    <p>".$red["chategory_name"]."</p>
+                                </div>
+                            ";
+                        }
+                    }
+                    else if(isset($_SESSION["name"]) && $_SESSION["name"]!="" && !isset($_GET["chategory"])){
+                        // echo "Samo ime";
+                        $rezultat=$con->query("select * from products p join chategory c on p.chategory= c.chategory_id WHERE product_name like '%".$_SESSION["name"]."%'");
+                        foreach($rezultat as $red){
+                            echo "
+                                <div class='item'>
+                                    <img src='resources/images/".$red["image"]."' alt=''>
+                                    <p>".$red["product_name"]."</p>
+                                    <p>".$red["chategory_name"]."</p>
+                                </div>
+                            ";
+                        }
+                    }
+                    else if(isset($_GET["chategory"]) && $_SESSION["name"]==""){
+                        // echo "Samo categorija";
                         $ids = implode(",", $_GET["chategory"]);
                         $rezultat=$con->query("select * from products p join chategory c on p.chategory= c.chategory_id WHERE chategory IN ($ids)");
                         foreach($rezultat as $red){
@@ -88,6 +164,7 @@
                         }
                     }
                     else{
+                        // echo "nista";
                         $rezultat=$con->query("select * from products p join chategory c on p.chategory= c.chategory_id");
                         foreach($rezultat as $red){
                             echo "
