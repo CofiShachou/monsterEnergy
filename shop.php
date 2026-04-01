@@ -16,35 +16,18 @@
         session_start();
         $con=new PDO("mysql:host=localhost;dbname=monsterenergy","root","");
         if(isset($_SESSION["ussername"]) && isset($_SESSION["password"])){
-            // require_once "header.php";
+            require_once "header.php";
         }
         else{
             $_SESSION["ussername"]="";
             $_SESSION["password"]="";
-            // require_once "header.php";  
+            require_once "header.php";  
         }
-        if(isset($_POST["upload"])){
-            $slika=$_FILES["uploadImage"];
-            echo $slika["name"];
-            echo "<br>";
-            echo $slika["type"];
-            $ext=pathinfo($slika["name"],PATHINFO_EXTENSION);
-            $allowedExtentions=["png","jpg","jpeg"];
-            if(in_array($ext,$allowedExtentions)){
-                move_uploaded_file($slika["tmp_name"],"resources/images/".$slika["name"]);
-
-                $insertImage=$con->prepare("insert into products ");
-                // ........
-            }
-            else{
-                echo "Mogu se uploadovati samo png jpg i jpeg slike";
-            }
-        }  
     ?>
     
     <div id="shop">
+        <div id="filters">
         <form id="filterForm" action="shop.php" method="get" >
-            <div id="filters">
                 <div>
                     <label for="name">Name:</label>
                     <input type="text" name="name" id="name" 
@@ -99,15 +82,9 @@
                         ?>
                     </fieldset>
                 </div>
-            </div>
-        </form>
-        <form action="shop.php" method="POST" enctype="multipart/form-data">
-            <div>
-                <label for="uploadImage">Upload image:</label>
-                <input type="file" name="uploadImage" id="uploadImage">
-                <button name="upload" value="up">Upload</button>
-            </div>
-        </form>
+            </form>
+            
+        </div>
 
          <div id="catalog">
             <div class="page">
@@ -176,6 +153,8 @@
                             ";
                         }
                     }
+
+                    // echo "<div><p>Nesto</p></div>";
                 ?>
                 
 

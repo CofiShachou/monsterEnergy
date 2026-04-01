@@ -108,3 +108,20 @@ $(".checkBox").change(()=>{
     $("#filterForm").submit();
     
 })
+
+
+$("#formUpload").submit(()=>{
+    $.ajax({
+        url:"upload.php",
+        type:"POST",
+        data:{upload:$("#up").val(),uploadImage:$("#uploadImage").val()},
+        success:function(x){
+            $("#greskaUpload").text("Moze");
+        },
+        error:function(x){
+            $("#greskaUpload").text("Jok");
+        }
+    })
+    window.location.reload();
+    return false;
+})

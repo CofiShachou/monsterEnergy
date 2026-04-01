@@ -29,6 +29,7 @@
             }
             if($usserExists){
                 echo "<li><a href='contact.php'>Contact admin</a></li>";
+                echo "<li><a href='upload.php'>Upload</a></li>";
                 $usserExists=false;
             }
         }
