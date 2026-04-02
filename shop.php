@@ -38,15 +38,16 @@
                     if(!isset($_GET["name"])){
                         $_GET["name"]="";
                     }
-                    $x='dsa';
                     if(isset($_SESSION["name"])){
                         echo "value='".$_GET["name"]."'";
                     }
                     ?>
                     >
                     <button name="reset"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div>
                     <button name="search">Search</button>
-                 </div>
+                </div>
 
                  <div>
                      <fieldset id="chategory" name="chategory">
@@ -64,7 +65,7 @@
                                     $check="";
                                 }
                                 echo "
-                                <div>
+                                <div class='check'>
                                     <input 
                                     type='checkbox' 
                                     name='chategory[]' 
@@ -103,7 +104,9 @@
                         foreach($rezultat as $red){
                             echo "
                                 <div class='item'>
-                                    <img src='resources/images/".$red["image"]."' alt=''>
+                                    <div>
+                                        <img src='resources/images/".$red["image"]."' alt=''>
+                                    </div>
                                     <p>".$red["product_name"]."</p>
                                     <p>".$red["chategory_name"]."</p>
                                 </div>
@@ -116,7 +119,9 @@
                         foreach($rezultat as $red){
                             echo "
                                 <div class='item'>
-                                    <img src='resources/images/".$red["image"]."' alt=''>
+                                    <div>
+                                        <img src='resources/images/".$red["image"]."' alt=''>
+                                    </div>
                                     <p>".$red["product_name"]."</p>
                                     <p>".$red["chategory_name"]."</p>
                                 </div>
@@ -130,7 +135,9 @@
                         foreach($rezultat as $red){
                             echo "
                                 <div class='item'>
-                                    <img src='resources/images/".$red["image"]."' alt=''>
+                                    <div>
+                                        <img src='resources/images/".$red["image"]."' alt=''>
+                                    </div>
                                     <p>".$red["product_name"]."</p>
                                     <p>".$red["chategory_name"]."</p>
                                 </div>
@@ -143,7 +150,9 @@
                         foreach($rezultat as $red){
                             echo "
                                 <div class='item'>
-                                    <img src='resources/images/".$red["image"]."' alt=''>
+                                    <div>
+                                        <img src='resources/images/".$red["image"]."' alt=''>
+                                    </div>
                                     <p>".$red["product_name"]."</p>
                                     <p>".$red["chategory_name"]."</p>
                                 </div>
@@ -161,7 +170,16 @@
     
 
     
-
+<?php
+        if(isset($_SESSION["ussername"]) && isset($_SESSION["password"])){
+            require_once "footer.php";
+        }
+        else{
+            $_SESSION["ussername"]="";
+            $_SESSION["password"]="";
+            require_once "footer.php";
+        }    
+    ?>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" 
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" 
     crossorigin="anonymous"></script>

@@ -1,5 +1,8 @@
 <?php
         session_start();
+        if(!isset($_SESSION["ussername"]) || $_SESSION["ussername"]==""){
+        header("location: index.php");
+        }
         $con=new PDO("mysql:host=localhost;dbname=monsterenergy","root","");
 
         if(isset($_POST["upload"])){
@@ -28,14 +31,11 @@
                 exit();
             }
             else{
-                echo "Nije dobra extenzija";
+                echo "You can upload only .jpg .png and .jpeg images!";
                 exit();
             }
         }
-        else{
-            echo "Nije poslato";
-            // exit();
-        }
+
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,9 +69,9 @@
             <input type="file" name="uploadImage" id="uploadImage">
             <p>Note: You can upload only .jpg .png and .jpeg images.</p>
             <button name="upload" value="up" id="upload">Upload</button>
+            <p id="greskaUpload"></p>
         </div>
     </form>
-    <p id="greskaUpload"></p>
 
 
     

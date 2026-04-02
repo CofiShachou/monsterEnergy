@@ -84,11 +84,11 @@ $("#sendRegister").click(()=>{
 })
 
 $("#signOut").click(()=>{
-    let DKASIPDHASJGDJISF="DASMJNHBGF"
+    let x="text"
     $.ajax({
         url:"obrada.php",
         type:"GET",
-        data:{reset:DKASIPDHASJGDJISF},
+        data:{reset:x},
         success:function(x){
             console.log(x);
         },
@@ -98,7 +98,7 @@ $("#signOut").click(()=>{
     })
     
     setTimeout(() => {
-        window.location.reload()
+        window.location="index.php";
     }, 100);
 })
 

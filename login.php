@@ -24,7 +24,6 @@
             $_SESSION["password"]="";
             require_once "header.php";
         }
-        var_dump($_SESSION["ussername"]);
     ?>
 
  <div id="logInPopUp">

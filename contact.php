@@ -1,5 +1,9 @@
 <?php
 session_start();
+var_dump($_SESSION["ussername"]);
+    if(!isset($_SESSION["ussername"]) || $_SESSION["ussername"]==""){
+        header("location: index.php");
+    }
     $con=new PDO("mysql:host=localhost;dbname=monsterenergy","root","");
         if(isset($_POST["contact"])){
             // echo "dbsbdhkHSAVDA";
@@ -72,22 +76,35 @@ session_start();
     
     
     <form  id="contactForm">
-        <label for="admin_email">Admin email"</label>
-        <input type="text" name="admin_email" id="admin_email">
 
-        <label for="title">title</label>
-        <input type="text" name="title" id="title">
-
-        <label for="message">Message</label>
-        <input type="text" name="message" id="message">
-
-        <button name="contact" value="contact" id="contact">Send</button>
+        <div>
+            <label for="admin_email">Admin email:</label>
+            <input type="text" name="admin_email" id="admin_email">
+    
+            <label for="title">Title:</label>
+            <input type="text" name="title" id="title">
+    
+            <label for="message">Message:</label>
+            <textarea type="text" name="message" id="message" cols="40" rows="5"></textarea>
+            
+    
+            <button name="contact" value="contact" id="contact">Send</button>
+        </div>
     </form>
     <p id="greska"></p>
 
 
     
-
+    <?php
+        // if(isset($_SESSION["ussername"]) && isset($_SESSION["password"])){
+        //     require_once "footer.php";
+        // }
+        // else{
+        //     $_SESSION["ussername"]="";
+        //     $_SESSION["password"]="";
+        //     require_once "footer.php";
+        // }    
+    ?>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" 
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" 
     crossorigin="anonymous"></script>

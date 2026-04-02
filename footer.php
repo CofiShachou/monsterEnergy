@@ -18,46 +18,24 @@
         }
         
         
-        echo " <header> <ul>";
+        echo " <footer> <ul>";
         foreach($rezultat as $red){
             if($red["name"]!="Admin panel")
                 echo "<li><a href=".$red["location"].">".$red["name"]."</a></li>";
+
 
             if($adminExists && $red["name"]=="Admin panel"){
                 echo "<li><a href=".$red["location"].">".$red["name"]."</a></li>";
                 $adminExists=false;
             }
+            if($usserExists){
+                echo "<li><a href='contact.php'>Contact admin</a></li>";
+                echo "<li><a href='upload.php'>Upload</a></li>";
+                $usserExists=false;
+            }
         }
-        if($usserExists){
-            echo "<li><a href='contact.php'>Contact admin</a></li>";
-            echo "<li><a href='upload.php'>Upload</a></li>";
-            $usserExists=false;
-            }
         echo "</ul> ";
-        
-        if
-        (
-            isset($_SESSION["ussername"]) 
-            && 
-            isset($_SESSION["password"]) 
-            && ($_SESSION["ussername"]!="") 
-            && ($_SESSION["password"]!="")
-            ){
-
-                echo "<div class='controls'>
-                <p>".$_SESSION["ussername"]."</p>
-                <button id='signOut'>Sign out</button>
-                <div>";
-                }
-        else{
-            echo "
-            <div>
-                <button id='btnLogin'>Log In</button>
-                <button id='btnRegister'>Register</button>
-            </div>
-            ";
-            }
-        echo"</header>";
+        echo"</footer>";
 
        
 ?>

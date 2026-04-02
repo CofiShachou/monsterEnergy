@@ -113,8 +113,179 @@
                 echo "Uspesno updateovan proizvod";
             }
 
+
+
+
+            if(isset($_GET["header_id_update"])){
+                // var_dump("DSAHDSDAS");
+                $getHeader=$con->prepare("select * from header where id = :id");
+                $getHeader->bindParam(":id",$_GET["header_id_update"]);
+                $getHeader->execute();
+                echo "<form action='adminPanel.php' method='GET' id='update'>";
+                foreach($getHeader as $red){
+                    // var_dump($getProduct);
+                    echo "
+                    <input type='hidden' name='id' value='".$red["id"]."'/>
+                    <div>
+                        <label>Name: </label>
+                        <input type='text' name='newHeaderName' value='".$red["name"]."'/>
+                    </div>
+
+                    <div>
+                        <label>Location: </label>
+                        <input type='text' name='newHeaderLocation' value='".$red["location"]."'/>
+                    </div>
+                    <div>
+                        <button id='updateProduct' name='updateHeader' value='click'>Update</button>
+                        <button id='cancle' name='cancle' value='click' >Cancle</button>
+                    </div>
+                    ";
+
+                }
+                echo "</form>";
+            }
+
+
+            if(isset($_GET["updateHeader"])){
+                $updateHeader=$con->prepare("update header set name=:name,location=:location where id= :id");
+                $updateHeader->bindParam(":name",$_GET["newHeaderName"]);
+                $updateHeader->bindParam(":location",$_GET["newHeaderLocation"]);
+                $updateHeader->bindParam(":id",$_GET["id"]);
+                $updateHeader->execute();
+                echo "Uspesno updateovan header";
+            }
+
+
+
+            if(isset($_GET["chategory_id_update"])){
+                // var_dump("DSAHDSDAS");
+                $getChategory=$con->prepare("select * from chategory where chategory_id = :id");
+                $getChategory->bindParam(":id",$_GET["chategory_id_update"]);
+                $getChategory->execute();
+                echo "<form action='adminPanel.php' method='GET' id='update'>";
+                foreach($getChategory as $red){
+                    // var_dump($getProduct);
+                    echo "
+                    <input type='hidden' name='id' value='".$red["chategory_id"]."'/>
+                    <div>
+                        <label>Name: </label>
+                        <input type='text' name='newChategoryName' value='".$red["chategory_name"]."'/>
+                    </div>
+                    <div>
+                        <button id='updateProduct' name='updateChategory' value='click'>Update</button>
+                        <button id='cancle' name='cancle' value='click' >Cancle</button>
+                    </div>
+                    ";
+
+                }
+                echo "</form>";
+            }
+
+            if(isset($_GET["updateChategory"])){
+                $updateChategory=$con->prepare("update chategory set chategory_name=:name where chategory_id = :id");
+                $updateChategory->bindParam(":name",$_GET["newChategoryName"]);
+                $updateChategory->bindParam(":id",$_GET["id"]);
+                $updateChategory->execute();
+                echo "Uspesno updateovana kategorija";
+            }
+
+
+
+            if(isset($_GET["usser_id_update"])){
+                // var_dump("DSAHDSDAS");
+                $getUsser=$con->prepare("select * from ussers where usser_id = :id");
+                $getUsser->bindParam(":id",$_GET["usser_id_update"]);
+                $getUsser->execute();
+                echo "<form action='adminPanel.php' method='GET' id='update'>";
+                foreach($getUsser as $red){
+                    // var_dump($getProduct);
+                    echo "
+                    <input type='hidden' name='id' value='".$red["usser_id"]."'/>
+                    <div>
+                        <label>Name: </label>
+                        <input type='text' name='newUsserName' value='".$red["ussername"]."'/>
+                    </div>
+
+                    <div>
+                        <label>Password: </label>
+                        <input type='text' name='newPassword' value='".$red["password"]."'/>
+                    </div>
+
+                    <div>
+                        <label>Email: </label>
+                        <input type='text' name='newEmail' value='".$red["email"]."'/>
+                    </div>
+
+                    <div>
+                        <label>Role id: </label>
+                        <input type='text' name='newRoleId' value='".$red["role_id"]."'/>
+                    </div>
+
+                    <div>
+                        <button id='updateProduct' name='updateUsser' value='click'>Update</button>
+                        <button id='cancle' name='cancle' value='click' >Cancle</button>
+                    </div>
+                    ";
+
+                }
+                echo "</form>";
+            }
+
+            if(isset($_GET["updateUsser"])){
+                $updateUsser=$con->prepare("update ussers set ussername=:name,password=:password,email=:email,role_id=:role where usser_id = :id");
+                $updateUsser->bindParam(":name",$_GET["newUsserName"]);
+                $updateUsser->bindParam(":password",$_GET["newPassword"]);
+                $updateUsser->bindParam(":email",$_GET["newEmail"]);
+                $updateUsser->bindParam("role",$_GET["newRoleId"]);
+                $updateUsser->bindParam(":id",$_GET["id"]);
+                $updateUsser->execute();
+                echo "Uspesno updateovan korisnik";
+            }
+
+
+            if(isset($_GET["message_id_update"])){
+                // var_dump("DSAHDSDAS");
+                $getMessage=$con->prepare("select * from messages where message_id = :id");
+                $getMessage->bindParam(":id",$_GET["message_id_update"]);
+                $getMessage->execute();
+                echo "<form action='adminPanel.php' method='GET' id='update'>";
+                foreach($getMessage as $red){
+                    // var_dump($getProduct);
+                    echo "
+                    <input type='hidden' name='id' value='".$red["message_id"]."'/>
+                    <div>
+                        <label>Title: </label>
+                        <input type='text' name='newTitle' value='".$red["title"]."'/>
+                    </div>
+                    <div>
+                        <label>Message: </label>
+                        <input type='text' name='newMessage' value='".$red["message"]."'/>
+                    </div>
+
+                    <div>
+                        <button id='updateProduct' name='updateMessage' value='click'>Update</button>
+                        <button id='cancle' name='cancle' value='click' >Cancle</button>
+                    </div>
+                    ";
+
+                }
+                echo "</form>";
+            }
+
+            if(isset($_GET["updateMessage"])){
+                $updateMessage=$con->prepare("update message set title=:title,message=:message where message_id = :id");
+                $updateMessage->bindParam(":title",$_GET["newTitle"]);
+                $updateMessage->bindParam(":message",$_GET["newMessage"]);
+                $updateMessage->bindParam(":id",$_GET["id"]);
+                $updateMessage->execute();
+                echo "Uspesno updateovana poruka";
+            }
+
         ?>
             <div id="tables">
+
+
+
             <?php   
 
 
@@ -151,7 +322,7 @@
             }
             foreach($headerSelect as $red){
                 echo "<div><a href='adminPanel.php?header_id_delete=".$red["id"]."'><i class='fa-solid fa-xmark'></i></a></div>";
-                echo "<div><a href='adminPanel.php?header_id_delete=".$red["id"]."'><i class='fa-solid fa-pen'></i></a></div>";
+                echo "<div><a href='adminPanel.php?header_id_update=".$red["id"]."'><i class='fa-solid fa-pen'></i></a></div>";
                 echo "<div>".$red["id"]."</div>";
                 echo "<div>".$red["name"]."</div>";
                 echo "<div>".$red["location"]."</div>"; 
@@ -168,7 +339,7 @@
             }
             foreach($chategorySelect as $red){
                 echo "<div><a href='adminPanel.php?chategory_id_delete=".$red["chategory_id"]."'><i class='fa-solid fa-xmark'></i></a></div>";
-                echo "<div><a href='adminPanel.php?chategory_id_delete=".$red["chategory_id"]."'><i class='fa-solid fa-pen'></i></a></div>";
+                echo "<div><a href='adminPanel.php?chategory_id_update=".$red["chategory_id"]."'><i class='fa-solid fa-pen'></i></a></div>";
                 echo "<div>".$red["chategory_id"]."</div>";
                 echo "<div>".$red["chategory_name"]."</div>";
             }
@@ -185,7 +356,7 @@
             }
             foreach($usserSelect as $red){
                 echo "<div><a href='adminPanel.php?usser_id_delete=".$red["usser_id"]."'><i class='fa-solid fa-xmark'></i></a></div>";
-                echo "<div><a href='adminPanel.php?usser_id_delete=".$red["usser_id"]."'><i class='fa-solid fa-pen'></i></a></div>";
+                echo "<div><a href='adminPanel.php?usser_id_update=".$red["usser_id"]."'><i class='fa-solid fa-pen'></i></a></div>";
                 echo "<div>".$red["usser_id"]."</div>";
                 echo "<div>".$red["ussername"]."</div>";
                 echo "<div>".$red["password"]."</div>";
@@ -206,7 +377,7 @@
             }
             foreach($messageSelect as $red){
                 echo "<div><a href='adminPanel.php?message_id_delete=".$red["message_id"]."'><i class='fa-solid fa-xmark'></i></a></div>";
-                echo "<div><a href='adminPanel.php?message_id_delete=".$red["message_id"]."'><i class='fa-solid fa-pen'></i></a></div>";
+                echo "<div><a href='adminPanel.php?message_id_update=".$red["message_id"]."'><i class='fa-solid fa-pen'></i></a></div>";
                 echo "<div>".$red["message_id"]."</div>";
                 echo "<div>".$red["admin_id"]."</div>";
                 echo "<div>".$red["usser_id"]."</div>";

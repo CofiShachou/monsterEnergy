@@ -4,12 +4,17 @@
     border: 0px;
     outline: 0px;
     text-decoration: none;
+    color: var(--secondary) ;
     color: white;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
     list-style-type: none;
     transition-duration: 0.5s;
 }
 
 body {
+    display: flex;
+    flex-direction: column;
     padding-top: 5vw;
     background-color: var(--s1);
 
@@ -28,6 +33,7 @@ body {
 header{
     display: flex;
     justify-content: space-around;
+    align-items: center;
     position: fixed;
     top: 0%;
     width: 100vw;
@@ -35,20 +41,26 @@ header{
     padding: 1vw;
     border-bottom: 2px solid var(--secondary);
 }
+footer{
+    /* position: absolute; */
+    /* bottom: 0%; */
+    background-color: var(--background);
+    border-top: 2px solid var(--secondary);
+}
 #logInPopUp,#registerPopUp{
     display: flex;
     width: 100vw;
     align-items: center;
     justify-content: center;
 }
-input[type=text]{
+input[type=text],input[type=email],textarea{
     background-color: var(--s1);
     color: var(--secondary);
     padding: 0.2vw;
     border-radius: 5px;
     border: 1px solid var(--background);
 }
-input[type=text]:focus{
+input[type=text]:focus,input[type=email]:focus,textarea:focus{
     border: 1px solid var(--secondary);
 }
 ul{
@@ -97,6 +109,7 @@ form{
 }
 .controls{
     display: flex;
+    align-items: center;
     gap: 1vw;
 }
 #shop{
@@ -108,6 +121,26 @@ form{
     border-radius: 10px;
     border-right: 2px solid var(--secondary);
     padding: 1vw;
+}
+#filterForm{
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+}
+input[type=checkbox]{
+    accent-color: var(--secondary);
+}
+.check{
+    display: flex;
+    gap: 1vw;
+}
+#chategory{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5vw;
+}
+#chategory legend{
+    margin-bottom: 1vw;
 }
 #chategory{
     display: flex;
@@ -130,6 +163,16 @@ form{
 .item{
     text-align: center;
     border: 2px solid var(--secondary);
+    background-color: var(--background);
+    /* background-color: rgb(110, 110, 110); */
+
+    border-radius: 10px;
+    /* padding: 1vw; */
+}
+.item>div{
+    background-image: url("../images/pozadina.png");
+    background-size: cover;
+    border-bottom: 2px solid var(--secondary);
     border-radius: 10px;
     padding: 1vw;
 }
@@ -205,6 +248,45 @@ form{
     align-items: center;
     gap: 1vw;
     margin: 2vw;
+}
+
+
+#contactForm,#formUpload,#logInPopUp,#registerPopUp{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    box-sizing: border-box;
+}
+#contactForm>div,#logInPopUp>form,#registerPopUp>form{
+    display: flex;
+    flex-direction: column;
+    gap: 2vw;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--background);
+    padding: 3vw 15vw;
+    border-radius: 10px;
+    border: 2px solid var(--secondary);
+}
+#contactForm>div>*,#formUpload>div>*{
+    font-size: 30px;
+}
+#contactForm>div>:is(input,textarea){
+    font-size: 20px;
+    padding: 0.5vw;
+}
+
+#formUpload>div{
+    display: flex;
+    flex-direction: column;
+    gap: 2vw;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--background);
+    padding: 3vw 15vw;
+    border-radius: 10px;
+    border: 2px solid var(--secondary);
 }
 
 /* ⁡⁣⁣⁢/////////////////////////////////////////////////////////////////////////⁡ */
