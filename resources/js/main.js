@@ -22,8 +22,6 @@ $("#sendLogin").click(()=>{
         return false
     }
     else{
-        console.log("dsa");
-        
         $("#greskaLogin").empty();
         if(!passwordRegEx.test(password)){
             $("#greskaLogin").append(`
@@ -110,18 +108,55 @@ $(".checkBox").change(()=>{
 })
 
 
-$("#formUpload").submit(()=>{
+$("#contact").click(()=>{
+    let title=$("#title").val();
+    let message=$("#message").val();
+    let admin_email=$("#admin_email").val();
+    
+    let titleReg=/^[A-z0-9\s]{1,49}$/;
+    let messageReg=/^[A-z0-9\s]{1,240}$/;
+    let contact=$("#contact").val()
+    if(titleReg.test(title) && messageReg.test(message)){
+        $.ajax({
+            url:"contact.php",
+            type:"POST",
+            data:{title:title,message:message,admin_email:admin_email,contact:contact},
+            success:function(x){
+                $("#greska").text(x);
+                $("#title").val("");
+                $("#message").val("");
+                $("#admin_email").val("");
+            },
+            error:function(x){
+                $("#greska").text(x);
+            }
+        })
+    }
+    else{
+        $("#greska").text("Title and message can only contain letters and numbers!");
+    }
+    return false;
+})
+
+
+
+$("#formUpload").submit(function(){
+    // let image=$("#uploadImage").val()
+    let formData=new FormData(this)
+    formData.append("upload", "upload");
+    let upload=$("#upload").val()
     $.ajax({
         url:"upload.php",
         type:"POST",
-        data:{upload:$("#up").val(),uploadImage:$("#uploadImage").val()},
+        data:formData,
+         contentType:false,
+        processData:false,
         success:function(x){
-            $("#greskaUpload").text("Moze");
+            $("#greskaUpload").text(x);
         },
-        error:function(x){
-            $("#greskaUpload").text("Jok");
+        error: function(x){
+            $("#greskaUpload").text("Nesto");
         }
     })
-    window.location.reload();
     return false;
 })

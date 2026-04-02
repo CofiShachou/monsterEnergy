@@ -1,3 +1,50 @@
+<?php
+session_start();
+    $con=new PDO("mysql:host=localhost;dbname=monsterenergy","root","");
+        if(isset($_POST["contact"])){
+            // echo "dbsbdhkHSAVDA";
+            $admin_id=0;
+            $title=$_POST["title"];
+            $message=$_POST["message"];
+            $admin_email=$_POST["admin_email"];
+
+            $adminUpit=$con->prepare("select * from ussers where role_id=2 and email = :usser_email");
+            $adminUpit->bindParam(":usser_email",$admin_email);
+            $adminUpit->execute();
+            foreach($adminUpit as $red){
+                $admin_id= $red["usser_id"];
+            }
+            var_dump($admin_id);
+            var_dump($_SESSION["ussername"]);
+            var_dump($_SESSION["password"]);
+            $usserUpit=$con->prepare("select * from ussers where ussername like :ussername and password like :password");
+            $usserUpit->bindParam(":ussername",$_SESSION["ussername"]);
+            $usserUpit->bindParam(":password",$_SESSION["password"]);
+            $usserUpit->execute();
+            foreach($usserUpit as $red){
+                $usser_id= $red["usser_id"];
+            }
+
+            
+            
+            $upit= $con->prepare("insert into messages (admin_id,usser_id,title,message) values (:admin_id,:usser_id,:title,:message)");
+            $upit->bindParam(":admin_id",$admin_id);
+            $upit->bindParam(":usser_id",$usser_id);
+            $upit->bindParam(":title",$title);
+            $upit->bindParam(":message",$message);
+
+            if($admin_id){
+                echo "Message sent successful!";
+                $upit->execute();
+                exit();
+            }
+            else{
+                echo "Wrong admin email!";
+                exit();
+            }
+        }
+            
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +59,6 @@
 </head>
 <body>
     <?php
-        session_start();
         if(isset($_SESSION["ussername"]) && isset($_SESSION["password"])){
             require_once "header.php";
         }
@@ -22,8 +68,10 @@
             require_once "header.php";  
         }    
     ?>
-
-    <form action="contact.php" method="post" id="contact">
+<!-- action="contact.php" method="post" -->
+    
+    
+    <form  id="contactForm">
         <label for="admin_email">Admin email"</label>
         <input type="text" name="admin_email" id="admin_email">
 
@@ -33,45 +81,9 @@
         <label for="message">Message</label>
         <input type="text" name="message" id="message">
 
-        <button name="contact">Send</button>
+        <button name="contact" value="contact" id="contact">Send</button>
     </form>
-
-    <?php
-        if(isset($_POST["contact"])){
-            $admin_id=0;
-            $title=$_POST["title"];
-            $message=$_POST["message"];
-            $admin_email=$_POST["admin_email"];
-            $conAdmin=new PDO("mysql:host=localhost;dbname=monsterenergy","root","");
-            $adminUpit=$con->prepare("select * from ussers where role_id=2 and email like :usser_email");
-            $adminUpit->bindParam(":usser_email",$admin_email);
-            $adminUpit->execute();
-            foreach($adminUpit as $red){
-                $admin_id= $red["usser_id"];
-            }
-
-            $usserUpit=$con->prepare("select * from ussers where ussername like :ussername and password like :password");
-            $usserUpit->bindParam(":ussername",$_SESSION["ussername"]);
-            $usserUpit->bindParam(":password",$_SESSION["password"]);
-            $usserUpit->execute();
-            foreach($usserUpit as $red){
-                $usser_id= $red["usser_id"];
-            }
-
-            
-            $con=new PDO("mysql:host=localhost;dbname=monsterenergy","root","");
-            $upit= $con->prepare("insert into messages (admin_id,usser_id,title,message) values (:admin_id,:usser_id,:title,:message)");
-            $upit->bindParam(":admin_id",$admin_id);
-            $upit->bindParam(":usser_id",$usser_id);
-            $upit->bindParam(":title",$title);
-            $upit->bindParam(":message",$message);
-            
-            echo "<p>Dole</p>";
-            echo "$admin_id + $usser_id + $title + $message";
-            }
-            
-    ?>
-    
+    <p id="greska"></p>
 
 
     

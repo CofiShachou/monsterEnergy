@@ -38,11 +38,9 @@
                     if(!isset($_GET["name"])){
                         $_GET["name"]="";
                     }
-                    // var_dump($_SESSION["name"]);
                     $x='dsa';
                     if(isset($_SESSION["name"])){
                         echo "value='".$_GET["name"]."'";
-                        // echo "value='".$x."'";
                     }
                     ?>
                     >
@@ -58,7 +56,6 @@
                             $rezultat=$con->query("select * from chategory");
                             $check="";
                             foreach($rezultat as $red){
-                                // var_dump($_GET["chategory"]);
                                 if(isset($_GET["chategory"]) && in_array($red["chategory_id"],$_GET["chategory"]))
                                 {
                                     $check="checked";
