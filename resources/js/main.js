@@ -13,10 +13,18 @@ $("#sendLogin").click(()=>{
             url:`obrada.php`,
             type:'POST',
             data:{ussername:ussername,password:password,type:"login"},
+            success:function(x){
+                if(x=="Seccessfull login!"){
+                    window.location=`index.php`
+                }
+            },
+            error:function(x){
+                $("#loginGreska").text(x)
+            }
         })
         
         setTimeout(() => {
-            window.location=`index.php`
+            
         }, 100);
         $("#greskaLogin").empty();
         return false
@@ -38,6 +46,12 @@ $("#sendLogin").click(()=>{
 })
 $("#btnRegister").click(()=>{
     window.location="register.php"
+})
+$("#closeLogin").click(()=>{
+    window.location="index.php";
+})
+$("#closeRegister").click(()=>{
+    window.location="index.php";
 })
 $("#sendRegister").click(()=>{
     
@@ -129,6 +143,7 @@ $("#contact").click(()=>{
             },
             error:function(x){
                 $("#greska").text(x);
+                
             }
         })
     }
@@ -159,4 +174,28 @@ $("#formUpload").submit(function(){
         }
     })
     return false;
+})
+
+
+
+
+
+if (window.matchMedia("(max-width: 575px)").matches) {
+    console.log("HGYUATRY");
+    
+    $("body").append(`<i class="fa-solid fa-bars" id='meni'></i>`);
+}
+
+let x=1;
+$(document).on("click","#meni",function(){
+    if(x==1){
+        $("header").css("width","100vw")
+        x=0;
+    }
+    else if(x==0){
+        $("header").css("width","0vw")
+        x=1;
+    }
+
+    
 })

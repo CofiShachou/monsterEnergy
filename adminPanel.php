@@ -6,7 +6,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin panel</title>
+    <meta name="description" content="Monster Energy admin panel. Manage products, users, categories, messages, and website content through the administration dashboard.">
+
+<meta name="keywords" content="admin panel, Monster Energy admin, manage products, manage users, product management, website administration, CMS dashboard">
+
+<link rel="icon" type="image/png" href="resources/images/logo.png">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -35,6 +40,22 @@
             else{
                 header("location: index.php");
             }
+
+            echo "<form action='adminPanel.php' method='GET' id='tableChose'>
+                <h2>Chose the table to modify</h2>
+                <div>
+                    <button name='showTable' id='usser' value='usser'>Ussers</button>
+                    <button name='showTable' id='prduct' value='product'>Products</button>
+                    <button name='showTable' id='header' value='header'>Header</button>
+                    <button name='showTable' id='chat' value='chat'>Chategoryes</button>
+                    <button name='showTable' id='message' value='message'>Messages</button>
+                </div>
+            </form>";
+
+
+
+
+
             
             function deleteItem($table,$idToDel,$id){
                 global $con;
@@ -288,108 +309,133 @@
 
             <?php   
 
-
-
-            $tableProducts=["Delete","Update","product_id","product_name","price","chategory","image","description"];
-
-
-            $productsSelect=$con->query("select p.product_id, p.product_name,p.price,p.chategory,p.image,p.description,c.chategory_id,c.chategory_name from products p join chategory c on chategory=chategory_id");
-            echo "<div id='adminTableProducts'>";
-            foreach($tableProducts as $tableRow){
-                echo "<div>".$tableRow."</div>";
+            if(!isset($_GET["showTable"])){
+                $_GET["showTable"]="product";
             }
-            foreach($productsSelect as $red){
-                echo "<div><a href='adminPanel.php?product_id_delete=".$red["product_id"]."'><i class='fa-solid fa-xmark'></i></a></div>";
-                echo "<div><a href='adminPanel.php?product_id_update=".$red["product_id"]."'><i class='fa-solid fa-pen'></i></a></div>";
-                echo "<div><p>".$red["product_id"]."</p></div>";
-                echo "<div><p>".$red["product_name"]."</p></div>";
-                echo "<div><p>".$red["price"]."</p></div>";
-                echo "<div><p>".$red["chategory"]."</p></div>";
-                echo "<div><img class='tableImage' src='resources/images/".$red["image"]."'/></div>";
-                echo "<div><p>".$red["description"]."</p></div>";
-                
-                
+
+
+            if($_GET["showTable"]=="product"){
+                $tableProducts=["Delete","Update","product_id","product_name","price","chategory","image","description"];
+
+
+                $productsSelect=$con->query("select p.product_id, p.product_name,p.price,p.chategory,p.image,p.description,c.chategory_id,c.chategory_name from products p join chategory c on chategory=chategory_id");
+                echo "<h2>Products</h2>";
+                echo "<div id='adminTableProducts'>";
+                foreach($tableProducts as $tableRow){
+                    echo "<div><h3>".$tableRow."</h3></div>";
+                }
+                foreach($productsSelect as $red){
+                    echo "<div><a href='adminPanel.php?product_id_delete=".$red["product_id"]."'><i class='fa-solid fa-xmark'></i></a></div>";
+                    echo "<div><a href='adminPanel.php?product_id_update=".$red["product_id"]."'><i class='fa-solid fa-pen'></i></a></div>";
+                    echo "<div><p>".$red["product_id"]."</p></div>";
+                    echo "<div><p>".$red["product_name"]."</p></div>";
+                    echo "<div><p>".$red["price"]."</p></div>";
+                    echo "<div><p>".$red["chategory"]."</p></div>";
+                    echo "<div><img class='tableImage' src='resources/images/".$red["image"]."'/></div>";
+                    echo "<div><p>".$red["description"]."</p></div>";
+                    
+                    
+                }
+                echo "</div>";
             }
-            echo "</div>";
 
 
-            $tableHeader=["Delete","Update","id","name","location"];
+            if($_GET["showTable"]=="header"){
+                $tableHeader=["Delete","Update","id","name","location"];
 
-            $headerSelect=$con->query("select * from header");
-            echo "<div id='adminTableHeader'>";
-            foreach($tableHeader as $tableRow){
-                echo "<div>".$tableRow."</div>";
+                $headerSelect=$con->query("select * from header");
+                echo "<h2>Header</h2>";
+                echo "<div id='adminTableHeader'>";
+                foreach($tableHeader as $tableRow){
+                    echo "<div><h3>".$tableRow."</h3></div>";
+                }
+                foreach($headerSelect as $red){
+                    echo "<div><a href='adminPanel.php?header_id_delete=".$red["id"]."'><i class='fa-solid fa-xmark'></i></a></div>";
+                    echo "<div><a href='adminPanel.php?header_id_update=".$red["id"]."'><i class='fa-solid fa-pen'></i></a></div>";
+                    echo "<div><p>".$red["id"]."</p></div>";
+                    echo "<div><p>".$red["name"]."</p></div>";
+                    echo "<div><p>".$red["location"]."</p></div>"; 
+                }
+                echo "</div>";
             }
-            foreach($headerSelect as $red){
-                echo "<div><a href='adminPanel.php?header_id_delete=".$red["id"]."'><i class='fa-solid fa-xmark'></i></a></div>";
-                echo "<div><a href='adminPanel.php?header_id_update=".$red["id"]."'><i class='fa-solid fa-pen'></i></a></div>";
-                echo "<div>".$red["id"]."</div>";
-                echo "<div>".$red["name"]."</div>";
-                echo "<div>".$red["location"]."</div>"; 
+
+            if($_GET["showTable"]=="chat"){
+                $tableChategory=["Delete","Update","chategory_id","chategory_name"];
+
+                $chategorySelect=$con->query("select * from chategory");
+                echo "<h2>Chategory</h2>";
+                echo "<div id='adminTableChategory'>";
+                foreach($tableChategory as $tableRow){
+                    echo "<div><h3>".$tableRow."</h3></div>";
+                }
+                foreach($chategorySelect as $red){
+                    echo "<div><a href='adminPanel.php?chategory_id_delete=".$red["chategory_id"]."'><i class='fa-solid fa-xmark'></i></a></div>";
+                    echo "<div><a href='adminPanel.php?chategory_id_update=".$red["chategory_id"]."'><i class='fa-solid fa-pen'></i></a></div>";
+                    echo "<div><p>".$red["chategory_id"]."</p></div>";
+                    echo "<div><p>".$red["chategory_name"]."</p></div>";
+                }
+                echo "</div>";
             }
-            echo "</div>";
 
 
-            $tableChategory=["Delete","Update","chategory_id","chategory_name"];
+            if($_GET["showTable"]=="usser"){
+                $tableUssers=["Delete","Update","usser_id","ussername","password","email","role_id"];
 
-            $chategorySelect=$con->query("select * from chategory");
-            echo "<div id='adminTableChategory'>";
-            foreach($tableChategory as $tableRow){
-                echo "<div>".$tableRow."</div>";
+                $usserSelect=$con->query("select * from ussers");
+                echo "<h2>Ussers</h2>";
+                echo "<div id='adminTableUssers'>";
+                foreach($tableUssers as $tableRow){
+                    echo "<div><h3>".$tableRow."</h3></div>";
+                }
+                foreach($usserSelect as $red){
+                    echo "<div><a href='adminPanel.php?usser_id_delete=".$red["usser_id"]."'><i class='fa-solid fa-xmark'></i></a></div>";
+                    echo "<div><a href='adminPanel.php?usser_id_update=".$red["usser_id"]."'><i class='fa-solid fa-pen'></i></a></div>";
+                    echo "<div><p>".$red["usser_id"]."</p></div>";
+                    echo "<div><p>".$red["ussername"]."</p></div>";
+                    echo "<div><p>".$red["password"]."</p></div>";
+                    echo "<div><p>".$red["email"]."</p></div>";
+                    echo "<div><p>".$red["role_id"]."</p></div>";
+                }
+                echo "</div>";
             }
-            foreach($chategorySelect as $red){
-                echo "<div><a href='adminPanel.php?chategory_id_delete=".$red["chategory_id"]."'><i class='fa-solid fa-xmark'></i></a></div>";
-                echo "<div><a href='adminPanel.php?chategory_id_update=".$red["chategory_id"]."'><i class='fa-solid fa-pen'></i></a></div>";
-                echo "<div>".$red["chategory_id"]."</div>";
-                echo "<div>".$red["chategory_name"]."</div>";
+
+
+
+            if($_GET["showTable"]=="message"){
+                $tableMessages=["Delete","Update","message_id","admin_id","usser_id","title","message"];
+
+                $messageSelect=$con->query("select * from messages");
+                echo "<h2>Messages</h2>";
+                echo "<div id='adminTableUssers'>";
+                foreach($tableMessages as $tableRow){
+                    echo "<div><h3>".$tableRow."</h3></div>";
+                }
+                foreach($messageSelect as $red){
+                    echo "<div><a href='adminPanel.php?message_id_delete=".$red["message_id"]."'><i class='fa-solid fa-xmark'></i></a></div>";
+                    echo "<div><a href='adminPanel.php?message_id_update=".$red["message_id"]."'><i class='fa-solid fa-pen'></i></a></div>";
+                    echo "<div><p>".$red["message_id"]."</p></div>";
+                    echo "<div><p>".$red["admin_id"]."</p></div>";
+                    echo "<div><p>".$red["usser_id"]."</p></div>";
+                    echo "<div><p>".$red["title"]."</p></div>";
+                    echo "<div><p>".$red["message"]."</p></div>";
+                }
+                echo "</div>";
             }
-            echo "</div>";
-
-
-            $tableUssers=["Delete","Update","usser_id","ussername","password","email","role_id"];
-
-
-            $usserSelect=$con->query("select * from ussers");
-            echo "<div id='adminTableUssers'>";
-            foreach($tableUssers as $tableRow){
-                echo "<div>".$tableRow."</div>";
-            }
-            foreach($usserSelect as $red){
-                echo "<div><a href='adminPanel.php?usser_id_delete=".$red["usser_id"]."'><i class='fa-solid fa-xmark'></i></a></div>";
-                echo "<div><a href='adminPanel.php?usser_id_update=".$red["usser_id"]."'><i class='fa-solid fa-pen'></i></a></div>";
-                echo "<div>".$red["usser_id"]."</div>";
-                echo "<div>".$red["ussername"]."</div>";
-                echo "<div>".$red["password"]."</div>";
-                echo "<div>".$red["email"]."</div>";
-                echo "<div>".$red["role_id"]."</div>";
-            }
-            echo "</div>";
-
-
-
-            $tableMessages=["Delete","Update","message_id","admin_id","usser_id","title","message"];
-
-
-            $messageSelect=$con->query("select * from messages");
-            echo "<div id='adminTableUssers'>";
-            foreach($tableMessages as $tableRow){
-                echo "<div>".$tableRow."</div>";
-            }
-            foreach($messageSelect as $red){
-                echo "<div><a href='adminPanel.php?message_id_delete=".$red["message_id"]."'><i class='fa-solid fa-xmark'></i></a></div>";
-                echo "<div><a href='adminPanel.php?message_id_update=".$red["message_id"]."'><i class='fa-solid fa-pen'></i></a></div>";
-                echo "<div>".$red["message_id"]."</div>";
-                echo "<div>".$red["admin_id"]."</div>";
-                echo "<div>".$red["usser_id"]."</div>";
-                echo "<div>".$red["title"]."</div>";
-                echo "<div>".$red["message"]."</div>";
-            }
-            echo "</div>";
-            
         ?>
     </div>
     
 
+
+    <?php
+        if(isset($_SESSION["ussername"]) && isset($_SESSION["password"])){
+            require_once "footer.php";
+        }
+        else{
+            $_SESSION["ussername"]="";
+            $_SESSION["password"]="";
+            require_once "footer.php";
+        }    
+    ?>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" 
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" 
     crossorigin="anonymous"></script>

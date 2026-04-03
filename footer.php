@@ -18,7 +18,9 @@
         }
         
         
-        echo " <footer> <ul>";
+        echo " <footer> <div>
+        <h3>Navigation:</h3>
+        <ul>";
         foreach($rezultat as $red){
             if($red["name"]!="Admin panel")
                 echo "<li><a href=".$red["location"].">".$red["name"]."</a></li>";
@@ -34,7 +36,17 @@
                 $usserExists=false;
             }
         }
-        echo "</ul> ";
+        echo "</ul></div> ";
+        echo "<div>
+            <h3>Support</h3>
+            <p>filip.savic.81.24@ict.edu.rs</p>
+            <p>filipsavic230@gmail.com</p>
+        </div>";
+        echo "<div>
+            <h3>Links</h3>
+            <a href='https://www.monsterenergy.com/en-us/'>Monster energy</a>
+            <a href='https://www.monsterenergy.com/en-us/events/'>Events</a>
+        </div>";
         echo"</footer>";
 
        

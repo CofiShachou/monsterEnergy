@@ -3,7 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop</title>
+    <title>Monster Energy Shop | Energy Drinks & Merchandise</title>
+
+<meta name="description" content="Explore the Monster Energy shop for energy drinks, merchandise, and accessories. Browse products by name or category and find your favorite Monster Energy items.">
+
+<meta name="keywords" content="Monster Energy shop, energy drinks, Monster merchandise, Monster products, buy Monster online, energy drink catalog">
+
+<meta name="robots" content="index, follow">
+
+<link rel="icon" type="image/png" href="resources/images/logo.png">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -109,6 +117,8 @@
                                     </div>
                                     <p>".$red["product_name"]."</p>
                                     <p>".$red["chategory_name"]."</p>
+                                    <p>".$red["price"]."</p>
+                                    <p>'".$red["description"]."'</p>
                                 </div>
                             ";
                         }
@@ -124,6 +134,8 @@
                                     </div>
                                     <p>".$red["product_name"]."</p>
                                     <p>".$red["chategory_name"]."</p>
+                                    <p>".$red["price"]."</p>
+                                    <p>'".$red["description"]."'</p>
                                 </div>
                             ";
                         }
@@ -140,6 +152,8 @@
                                     </div>
                                     <p>".$red["product_name"]."</p>
                                     <p>".$red["chategory_name"]."</p>
+                                    <p>".$red["price"]."</p>
+                                    <p>'".$red["description"]."'</p>
                                 </div>
                             ";
                         }
@@ -155,6 +169,8 @@
                                     </div>
                                     <p>".$red["product_name"]."</p>
                                     <p>".$red["chategory_name"]."</p>
+                                    <p>".$red["price"]."</p>
+                                    <p>'".$red["description"]."'</p>
                                 </div>
                             ";
                         }

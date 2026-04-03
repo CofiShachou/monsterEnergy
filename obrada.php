@@ -11,7 +11,7 @@ $passwordRegEx="/^.{3,10}$/";
 if(isset($_POST["ussername"]) && isset($_POST["password"])){
     $ussername=$_POST["ussername"];
     $password=$_POST["password"];
-    if(preg_match($ussername,$_POST["ussername"]) && preg_match($ussername,$_POST["password"])){
+    if(preg_match($ussernameRegEx,$_POST["ussername"]) && preg_match($passwordRegEx,$_POST["password"])){
     }
 }else{
     $ussername=$_SESSION["ussername"];
@@ -19,14 +19,22 @@ if(isset($_POST["ussername"]) && isset($_POST["password"])){
 }
 if($_POST["type"]=="login"){
     $rezultat=$con->query("select * from ussers");
+    $has=false;
     foreach($rezultat as $red){
-        echo $ussername;
-        echo $password;
         if($red["ussername"]==$ussername && $red["password"]==$password){
             $_SESSION["ussername"]=$ussername;
             $_SESSION["password"]=$password;
+            $has=true;
         }
+        
     }
+    if(!$has){
+        echo "Wrong ussername or password!";
+    }
+    else{
+        echo "Seccessfull login!";
+    }
+
 }
 else if($_POST["type"]=="register"){
     $email=$_POST["email"];

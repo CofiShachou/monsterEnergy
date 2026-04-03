@@ -3,7 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Register | Monster Energy</title>
+
+<meta name="description" content="Create a Monster Energy account to explore products, send messages to administrators, and access personalized features.">
+
+<meta name="keywords" content="register Monster Energy, create account, sign up, user registration, Monster Energy account">
+
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="icon" type="image/png" href="resources/images/logo.png">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -34,7 +42,7 @@
             </div>
             <div>
                 <label for="registerPassword">Password:</label>
-                <input type="text" name="registerPassword" id="registerPassword">
+                <input type="password" name="registerPassword" id="registerPassword">
             </div>
             <div>
                 <label for="registerEmail">Email:</label>
@@ -43,13 +51,23 @@
             <div id="greskaRegister"></div>
             <div>
                 <button id="sendRegister">Send</button>
-                <button id="closeRegister">Close</button>
+                <button id="closeRegister" type='button'>Close</button>
             </div>
         </form>
     </div>
 
-    
-
+    <div class="fWrap">
+<?php
+        if(isset($_SESSION["ussername"]) && isset($_SESSION["password"])){
+            require_once "footer.php";
+        }
+        else{
+            $_SESSION["ussername"]="";
+            $_SESSION["password"]="";
+            require_once "footer.php";
+        }    
+    ?>
+    </div>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" 
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" 
     crossorigin="anonymous"></script>

@@ -1,6 +1,5 @@
 <?php
 session_start();
-var_dump($_SESSION["ussername"]);
     if(!isset($_SESSION["ussername"]) || $_SESSION["ussername"]==""){
         header("location: index.php");
     }
@@ -18,9 +17,6 @@ var_dump($_SESSION["ussername"]);
             foreach($adminUpit as $red){
                 $admin_id= $red["usser_id"];
             }
-            var_dump($admin_id);
-            var_dump($_SESSION["ussername"]);
-            var_dump($_SESSION["password"]);
             $usserUpit=$con->prepare("select * from ussers where ussername like :ussername and password like :password");
             $usserUpit->bindParam(":ussername",$_SESSION["ussername"]);
             $usserUpit->bindParam(":password",$_SESSION["password"]);
@@ -54,7 +50,13 @@ var_dump($_SESSION["ussername"]);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MonsterEnergy</title>
+    <title>Contact | Monster Energy</title>
+
+<meta name="description" content="Contact Monster Energy administrators. Send messages, ask questions, or request support directly through the contact form.">
+
+<meta name="keywords" content="contact Monster Energy, send message, contact admin, support form, customer message, website contact form">
+
+<link rel="icon" type="image/png" href="resources/images/logo.png">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -75,7 +77,7 @@ var_dump($_SESSION["ussername"]);
 <!-- action="contact.php" method="post" -->
     
     
-    <form  id="contactForm">
+    <form  id="contactForm"> 
 
         <div>
             <label for="admin_email">Admin email:</label>
@@ -89,21 +91,21 @@ var_dump($_SESSION["ussername"]);
             
     
             <button name="contact" value="contact" id="contact">Send</button>
+            <p id="greska"></p>
         </div>
     </form>
-    <p id="greska"></p>
 
 
     
     <?php
-        // if(isset($_SESSION["ussername"]) && isset($_SESSION["password"])){
-        //     require_once "footer.php";
-        // }
-        // else{
-        //     $_SESSION["ussername"]="";
-        //     $_SESSION["password"]="";
-        //     require_once "footer.php";
-        // }    
+        if(isset($_SESSION["ussername"]) && isset($_SESSION["password"])){
+            require_once "footer.php";
+        }
+        else{
+            $_SESSION["ussername"]="";
+            $_SESSION["password"]="";
+            require_once "footer.php";
+        }    
     ?>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" 
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" 

@@ -18,7 +18,8 @@
         }
         
         
-        echo " <header> <ul>";
+        echo " <header> <ul>
+        <li><a href='index.php'><img src='resources/images/logo.png' id='logo'/></a></li>";
         foreach($rezultat as $red){
             if($red["name"]!="Admin panel")
                 echo "<li><a href=".$red["location"].">".$red["name"]."</a></li>";
@@ -33,7 +34,7 @@
             echo "<li><a href='upload.php'>Upload</a></li>";
             $usserExists=false;
             }
-        echo "</ul> ";
+        echo "</ul> <div class='controls'>";
         
         if
         (
@@ -44,20 +45,19 @@
             && ($_SESSION["password"]!="")
             ){
 
-                echo "<div class='controls'>
+                echo "
+                <i class='fa-solid fa-user'></i>
                 <p>".$_SESSION["ussername"]."</p>
-                <button id='signOut'>Sign out</button>
-                <div>";
+                <button id='signOut'>Sign out</button>";
                 }
         else{
             echo "
-            <div>
                 <button id='btnLogin'>Log In</button>
                 <button id='btnRegister'>Register</button>
-            </div>
             ";
             }
-        echo"</header>";
+        echo"<a href='resources/dokumentacija.pdf'>Documentation</a></div>
+        </header>";
 
        
 ?>

@@ -3,7 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login | Monster Energy</title>
+
+<meta name="description" content="Log in to your Monster Energy account to access personalized features, contact administrators, and manage your account.">
+
+<meta name="keywords" content="login Monster Energy, user login, account login, sign in, Monster Energy account">
+
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="icon" type="image/png" href="resources/images/logo.png">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -34,20 +42,30 @@
             </div>
             <div>
                 <label for="password">Password:</label>
-                <input type="text" name="password" id="password">
+                <input type="password" name="password" id="password">
             </div>
             <div id="greskaLogin"></div>
             <div>
                 <button id="sendLogin">Send</button>
-                <button id="closeLogin">Close</button>
+                <button id="closeLogin" type='button'>Close</button>
             </div>
+            <p id="loginGreska"></p>
         </form>
     </div>
 
     
-
-    
-
+<div class="fWrap">
+    <?php
+        if(isset($_SESSION["ussername"]) && isset($_SESSION["password"])){
+            require_once "footer.php";
+        }
+        else{
+            $_SESSION["ussername"]="";
+            $_SESSION["password"]="";
+            require_once "footer.php";
+        }    
+    ?>
+</div>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" 
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" 
     crossorigin="anonymous"></script>
